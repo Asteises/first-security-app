@@ -18,6 +18,7 @@ public class RegistrationService {
     @Transactional // Все изменения в БД должны помечаться как Transactional.
     public void register(Person person) {
 
+        person.setRole("ROLE_USER");
         person.setPassword(passwordEncoder.encode(person.getPassword())); // шифруем пароль перед сохранением в БД
         peopleStorage.save(person);
     }

@@ -2,10 +2,12 @@ package ru.asteises.firstsecurityapp.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import ru.asteises.firstsecurityapp.models.Person;
 
 import java.util.Collection;
+import java.util.Collections;
 
 @RequiredArgsConstructor
 public class PersonDetails implements UserDetails {
@@ -13,12 +15,12 @@ public class PersonDetails implements UserDetails {
     private final Person person;
 
     /**
-     * Список прав пользователя.
+     * Список ролей (прав) пользователя. Либо список authorities.
      * @return
      */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return Collections.singletonList(new SimpleGrantedAuthority(person.getRole()));
     }
 
     @Override
